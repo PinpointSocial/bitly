@@ -24,13 +24,19 @@ abstract class Bitly_Core {
    }
 
    public function shorten($url) {
-      
+      $query = $this->base_url . 'shorten?login=' . $this->login . '&apiKey=' . $this->api_key . '&longUrl=' . urlencode($url) . '&format=json';
+       $req = file_get_contents($query);
+       $req = json_decode($req, TRUE);
+       if($req['status_code'] != 200) {
+	  throw new Bitly_Exception('Invalid Response From Bitly');
+       }
+       return $req['data']['url'];
    }
 
    public function get_login() {
       return $this->login;
    }
-   
+
    public function get_api_key() {
       return $this->api_key;
    }
