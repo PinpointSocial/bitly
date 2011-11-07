@@ -28,7 +28,7 @@ abstract class Bitly_Core {
        $req = file_get_contents($query);
        $req = json_decode($req, TRUE);
        if($req['status_code'] != 200) {
-	  		throw new Bitly_Exception($req['status_txt'] . '   ' . urlencode($url));
+	  		throw new Bitly_Exception($req['status_txt'] . '   ' . $url);
        }
        return $req['data']['url'];
    }
