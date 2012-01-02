@@ -24,7 +24,7 @@ abstract class Bitly_Core {
    }
 
    public function shorten($url) {
-      $query = $this->base_url . 'shorten?login=' . $this->login . '&apiKey=' . $this->api_key . '&longUrl=' . urlencode($url) . '&format=json';
+      $query = $this->base_url . 'shorten?login=' . $this->login . '&apiKey=' . $this->api_key . '&longUrl=' . rawurlencode($url) . '&format=json';
        $req = file_get_contents($query);
        $req = json_decode($req, TRUE);
        if($req['status_code'] != 200) {
